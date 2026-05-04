@@ -20,6 +20,8 @@ jobs:
           payload: |
             channel: "C65P70KEU"
             text: "❌ Skaffold Integration Build Failed on Master (TEST)"
+            style: 
+              "bold": true
             attachments:
               - color: "danger"
                 blocks:
