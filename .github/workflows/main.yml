@@ -1,0 +1,50 @@
+# Test workflow to verify Slack notification format
+# This can be manually triggered to test the notification
+name: Test Slack Notification
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Test Slack Notification
+        uses: slackapi/slack-github-action@v3.0.3
+        with:
+          token: ${{ secrets.SLACK_TOKEN_ALERTS_RELEASE }}
+          method: chat.postMessage
+          payload: |
+            channel: "C65P70KEU"
+            text: "❌ Skaffold Integration Build Failed on Master (TEST)"
+            attachments:
+              - color: "danger"
+                blocks:
+                  - type: "header"
+                    text:
+                      type: "plain_text"
+                      text: "❌ Skaffold Integration Build Failed (TEST)"
+                      emoji: true
+                  - type: "section"
+                    fields:
+                      - type: "mrkdwn"
+                        text: "*Branch:*\nmaster"
+                      - type: "mrkdwn"
+                        text: "*Commit:*\n<https://github.com/${{ github.repository }}/commit/${{ github.sha }}|`${{ github.sha }}`>"
+                      - type: "mrkdwn"
+                        text: "*Author:*\nTest User"
+                      - type: "mrkdwn"
+                        text: "*Workflow:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                  - type: "section"
+                    text:
+                      type: "mrkdwn"
+                      text: "*Commit Message:*\nThis is a test notification to verify the Slack message format"
+                  - type: "context"
+                    elements:
+                      - type: "mrkdwn"
+                        text: "⚠️ This is a TEST notification - triggered manually via workflow_dispatch"
+
+# Made with Bob
