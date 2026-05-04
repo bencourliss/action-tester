@@ -23,11 +23,6 @@ jobs:
             attachments:
               - color: "danger"
                 blocks:
-                  - type: "header"
-                    text:
-                      type: "plain_text"
-                      text: "Build Failure"
-                      emoji: true
                   - type: "section"
                     fields:
                       - type: "mrkdwn"
