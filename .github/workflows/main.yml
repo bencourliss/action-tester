@@ -19,7 +19,6 @@ jobs:
           method: chat.postMessage
           payload: |
             channel: "C65P70KEU"
-            text: "❌ Skaffold Integration Build Failed on Master (TEST)"
             attachments:
               - color: "danger"
                 blocks:
